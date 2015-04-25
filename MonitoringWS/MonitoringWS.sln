@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MonitoringWS", "MonitoringWS\MonitoringWS.vbproj", "{8790517E-E736-4274-BDF0-4394F1E02398}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MonitoringAgentSetup", "MonitoringAgentSetup\MonitoringAgentSetup.vdproj", "{DC7961C9-8379-4DF4-B2A2-34FE80F40E06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8790517E-E736-4274-BDF0-4394F1E02398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8790517E-E736-4274-BDF0-4394F1E02398}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8790517E-E736-4274-BDF0-4394F1E02398}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8790517E-E736-4274-BDF0-4394F1E02398}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC7961C9-8379-4DF4-B2A2-34FE80F40E06}.Debug|Any CPU.ActiveCfg = Debug
+		{DC7961C9-8379-4DF4-B2A2-34FE80F40E06}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
