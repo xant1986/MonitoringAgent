@@ -1,4 +1,4 @@
-# MonitoringAgent2
+# Monitoring Agent 2.0.0
 
 This is a VB.Net Windows Service WMI Monitoring Agent
 
