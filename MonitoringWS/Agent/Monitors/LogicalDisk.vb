@@ -5,7 +5,7 @@ Imports System.Math
 Namespace Agent
     Public Class LogicalDisk
 
-        Public Shared Sub GetLogicalDisk()
+        Public Sub GetLogicalDisk()
 
             Dim LDSize As Double = Nothing
             Dim LDFreeSpace As Double = 0
@@ -41,9 +41,9 @@ Namespace Agent
             Catch ex As Exception
 
             End Try
-            
 
-       
+
+
         End Sub
 
 

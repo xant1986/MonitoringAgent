@@ -1,11 +1,10 @@
-﻿Imports System.Threading
-Imports System.Management
+﻿Imports System.Management
 
 
 Namespace Agent
     Public Class Network
 
-        Public Shared Sub GetNetwork()
+        Public Sub GetNetwork()
 
             Dim wmiDataList As New List(Of Object)
             Dim qString As String = "SELECT * FROM Win32_NetworkAdapterConfiguration"

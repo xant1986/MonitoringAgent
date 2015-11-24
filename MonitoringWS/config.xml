@@ -1,0 +1,10 @@
+<monitoring-config>
+<object class="agent" parameter="version" value="1.0" />
+<object class="agent" parameter="server" value="localhost" />
+<object class="agent" parameter="tcp_listen" value="10000" />
+<object class="agent" parameter="tcp_send" value="10001" />
+<object class="agent" parameter="poll_period" value="2" />
+<object class="windows" parameter="service" value="MSSQLSERVER" />
+<object class="windows" parameter="service" value="SQLSERVERAGENT" />
+<object class="windows" parameter="service" value="LanmanServer" />
+</monitoring-config>

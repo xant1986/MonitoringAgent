@@ -8,17 +8,15 @@ Namespace Agent
         Public Shared AgentDataList As New List(Of AgentData)
         Public Shared AgentConfigurationList As New List(Of AgentConfiguration)
 
-        Public Shared Sub SaveDatabase()
+        Public Sub SaveDatabase()
             Dim settings As XmlWriterSettings = New XmlWriterSettings()
             settings.Indent = True
             settings.NewLineOnAttributes = False
             settings.OmitXmlDeclaration = True
-            Dim SB As New StringBuilder()
+            Dim SBuilder As New StringBuilder()
 
-            Dim wValueType = Nothing
-
-            Using SW As New StringWriter(SB)
-                Using writer = XmlWriter.Create(SW, settings)
+            Using SWriter As New StringWriter(SBuilder)
+                Using writer = XmlWriter.Create(SWriter, settings)
                     writer.WriteStartDocument()
                     writer.WriteStartElement("agent-data")
 
@@ -38,12 +36,14 @@ Namespace Agent
                 End Using
             End Using
 
-            File.WriteAllText(AgentPath & "\AgentDatabase.xml", SB.ToString)
-
+            SyncLock (lock)
+                File.WriteAllText(AgentPath & "\AgentDatabase.xml", SBuilder.ToString)
+            End SyncLock
         End Sub
 
-        Public Shared Sub UpdateTables()
+        Private lock As New Object
 
+        Public Sub UpdateTables()
             For Each i In AgentDataList
                 i.AgentDataSent = True
             Next
@@ -52,11 +52,9 @@ Namespace Agent
 
             'Purge data older than 7 days
             AgentDataList.RemoveAll(Function(x) x.AgentDate < PurgeDate)
-
         End Sub
 
-
     End Class
-    
+
 End Namespace
 

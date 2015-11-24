@@ -1,10 +1,9 @@
-﻿Imports System.Threading
-Imports System.Management
+﻿Imports System.Management
 
 Namespace Agent
     Public Class OperatingSystem
 
-        Public Shared Sub GetOperatingSystem()
+        Public Sub GetOperatingSystem()
 
             Dim wmiDataList As New List(Of String)
             Dim qString As String = "SELECT * FROM Win32_OperatingSystem"

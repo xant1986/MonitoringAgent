@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_BBCBD4CB522142D1B608372CD2995AFF"
+        "MsmKey" = "8:_F219E9461F64404EB577A94FE298AC2A"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -56,6 +56,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
         "Release"
@@ -174,10 +182,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BBCBD4CB522142D1B608372CD2995AFF"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F219E9461F64404EB577A94FE298AC2A"
             {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\Downloads\\Untitled.ico"
-            "TargetName" = "8:Monitoring.ico"
+            "SourcePath" = "8:..\\m2.ico"
+            "TargetName" = "8:m2.ico"
             "Tag" = "8:"
             "Folder" = "8:_2C7E41369F714C75B9FB32B800052524"
             "Condition" = "8:"
@@ -249,26 +257,26 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:MonitoringAgent"
-        "ProductCode" = "8:{1CAE01F1-8762-4B7E-A1AA-26A7B65DE2E5}"
-        "PackageCode" = "8:{06E74ACB-89F7-43B5-B4C7-F092A5E88206}"
+        "ProductName" = "8:M2"
+        "ProductCode" = "8:{9FE819EA-78E9-4C89-AB3A-6794AF21FA36}"
+        "PackageCode" = "8:{B52C97DB-994A-4F09-88C0-4A2BA13C5C91}"
         "UpgradeCode" = "8:{3758D1B1-C7E0-47BA-8D6F-F89AC30041CC}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.1"
-        "Manufacturer" = "8:Cythraul"
+        "ProductVersion" = "8:2.0.0"
+        "Manufacturer" = "8:wcpSoft"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:MonitoringAgent"
+        "Title" = "8:MonitoringAgent2"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Phil White"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Monitoring Agent"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_BBCBD4CB522142D1B608372CD2995AFF"
+        "ARPPRODUCTICON" = "8:_F219E9461F64404EB577A94FE298AC2A"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
@@ -796,6 +804,7 @@
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {
+                "ExcludeFilter" = "8:*.config"
                 }
             }
         }

@@ -6,7 +6,7 @@ Namespace Agent
 
     Public Class Processor
 
-        Public Shared Sub GetProcessor()
+        Public Sub GetProcessor()
 
             Dim wmiDataList As New List(Of String)
 

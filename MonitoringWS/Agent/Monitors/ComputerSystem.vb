@@ -1,11 +1,10 @@
-﻿Imports System.Threading
-Imports System.Management
+﻿Imports System.Management
 Imports System.Math
 
 Namespace Agent
     Public Class ComputerSystem
 
-        Public Shared Sub GetComputerSystem()
+        Public Sub GetComputerSystem()
 
             Dim wmiDataList As New List(Of String)
             Dim qString As String = "SELECT * FROM Win32_ComputerSystem"

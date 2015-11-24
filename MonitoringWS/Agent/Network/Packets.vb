@@ -1,33 +1,29 @@
-﻿'Imports MonitoringWS.DataClass
-Imports MonitoringWS.Agent.Database
+﻿Imports MonitoringWS.Agent.Database
 Imports MonitoringWS.Agent.AgentParameters
-Imports MonitoringWS.Encryption
 Imports System.Xml
 Imports System.Text
 Imports System.IO
 
-Public Class PacketClass
+Public Class Packets
 
-    Public Shared Function CreatePacket()
+    Public Function CreatePacket()
 
-        Dim packet As String = Nothing
+        Dim Packet As String = Nothing
 
         Dim settings As XmlWriterSettings = New XmlWriterSettings()
         settings.Indent = True
         settings.NewLineOnAttributes = False
         settings.OmitXmlDeclaration = True
-        Dim sb As New StringBuilder()
+        Dim SBuilder As New StringBuilder()
 
-        Dim wValueType = Nothing
-
-        Using sw As New StringWriter(sb)
-            Using writer = XmlWriter.Create(sw, settings)
+        Using SWriter As New StringWriter(SBuilder)
+            Using writer = XmlWriter.Create(SWriter, settings)
                 writer.WriteStartDocument()
                 writer.WriteStartElement("agent-data")
                 AgentDate = Date.Now
 
                 Dim Q = From T In AgentDataList
-                      Select T Where T.AgentDataSent = False
+                        Select T Where T.AgentDataSent = False
 
                 For Each i In Q
                     writer.WriteStartElement("object")
@@ -44,10 +40,11 @@ Public Class PacketClass
             End Using
         End Using
 
-        packet = sb.ToString
-        packet = EncryptData(packet)
+        Packet = SBuilder.ToString
+        Dim Encryption As New Encryption
+        Packet = Encryption.EncryptData(Packet)
 
-        Return packet
+        Return Packet
 
     End Function
 

@@ -69,10 +69,11 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AgentLoad.vb" />
+    <Compile Include="Agent\Processes\AgentLoad.vb" />
     <Compile Include="Agent\Database\Database.vb" />
     <Compile Include="Agent\Database\Tables.vb" />
     <Compile Include="Agent\Encryption\Encryption.vb" />
+    <Compile Include="Agent\Logging\NetworkLog.vb" />
     <Compile Include="Agent\Monitors\ComputerSystem.vb" />
     <Compile Include="Agent\Monitors\LogicalDisk.vb" />
     <Compile Include="Agent\Monitors\Memory.vb" />
@@ -80,10 +81,12 @@
     <Compile Include="Agent\Monitors\OperatingSystem.vb" />
     <Compile Include="Agent\Monitors\Processor.vb" />
     <Compile Include="Agent\Monitors\Services.vb" />
-    <Compile Include="Agent\Network\PacketClass.vb" />
-    <Compile Include="Agent\Network\ReceiveClass.vb" />
-    <Compile Include="Agent\Network\SendClass.vb" />
+    <Compile Include="Agent\Network\Packets.vb" />
+    <Compile Include="Agent\Network\ReceiveTCP.vb" />
+    <Compile Include="Agent\Network\SendTCP.vb" />
     <Compile Include="Agent\Parameters\AgentParameters.vb" />
+    <Compile Include="Agent\Processes\AgentListener.vb" />
+    <Compile Include="Agent\Processes\AgentWMI.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>

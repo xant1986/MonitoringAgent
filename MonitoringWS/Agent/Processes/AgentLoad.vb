@@ -7,14 +7,20 @@ Imports System.Text
 
 Public Class AgentLoad
 
-    Public Shared Sub LoadParameters()
+    Public NetworkLog As New NetworkLog
+
+    Public Sub LoadParameters()
         'Configuration Parameters
         CreateXML()
         LoadXML()
         LoadDatabase()
+
+        'Log Parameters
+        NetworkLog.InitializeLog()
+
     End Sub
 
-    Public Shared Sub CreateXML()
+    Public Sub CreateXML()
         If Not File.Exists(AgentPath & "\AgentConfiguration.xml") Then
             Dim Settings As XmlWriterSettings = New XmlWriterSettings()
             Settings.Indent = True
@@ -33,6 +39,7 @@ Public Class AgentLoad
                     writer.WriteAttributeString("value", "1.0")
                     writer.WriteEndElement()
 
+                    'For testing we are sending to the localhost
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
                     writer.WriteAttributeString("parameter", "server")
@@ -45,10 +52,13 @@ Public Class AgentLoad
                     writer.WriteAttributeString("value", "10000")
                     writer.WriteEndElement()
 
+                    'We are sending data to the agent for display.  Normally we would configure this
+                    'port to go to a server Application
+
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
                     writer.WriteAttributeString("parameter", "tcp_send")
-                    writer.WriteAttributeString("value", "10001")
+                    writer.WriteAttributeString("value", "10000")
                     writer.WriteEndElement()
 
                     writer.WriteStartElement("object")
@@ -56,6 +66,14 @@ Public Class AgentLoad
                     writer.WriteAttributeString("parameter", "poll_period")
                     writer.WriteAttributeString("value", "1")
                     writer.WriteEndElement()
+
+                    'Adding a sample Windows Service
+                    writer.WriteStartElement("object")
+                    writer.WriteAttributeString("class", "windows")
+                    writer.WriteAttributeString("parameter", "service")
+                    writer.WriteAttributeString("value", "LanmanServer")
+                    writer.WriteEndElement()
+
 
                     writer.WriteEndElement()
                     writer.WriteEndDocument()
@@ -68,7 +86,7 @@ Public Class AgentLoad
 
     End Sub
 
-    Public Shared Sub LoadXML()
+    Public Sub LoadXML()
 
         Try
 
@@ -80,8 +98,8 @@ Public Class AgentLoad
             Next
 
             Dim Q = From T In AgentConfigurationList
-                  Where T.AgentClass.Contains("agent")
-                  Select T
+                    Where T.AgentClass.Contains("agent")
+                    Select T
 
             For Each i In Q
                 Select Case i.AgentParameter
@@ -105,7 +123,7 @@ Public Class AgentLoad
 
     End Sub
 
-    Public Shared Sub LoadDatabase()
+    Public Sub LoadDatabase()
 
         Try
             Dim xelement As XElement = xelement.Load(AgentPath & "\AgentDatabase.xml")

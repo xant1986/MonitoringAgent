@@ -35,6 +35,7 @@
         Me.MonitoringServiceInstaller.Description = "Windows Monitoring"
         Me.MonitoringServiceInstaller.DisplayName = "MonitoringWS"
         Me.MonitoringServiceInstaller.ServiceName = "MonitoringWS"
+        Me.MonitoringServiceInstaller.StartType = System.ServiceProcess.ServiceStartMode.Automatic
         '
         'ProjectInstaller
         '

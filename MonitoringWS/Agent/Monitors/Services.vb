@@ -1,10 +1,9 @@
-﻿Imports System.Threading
-Imports System.Management
+﻿Imports System.Management
 
 Namespace Agent
     Public Class Services
 
-        Public Shared Sub GetServices()
+        Public Sub GetServices()
 
             Dim Q = From T In Database.AgentConfigurationList
                     Where T.AgentClass = "windows" And T.AgentParameter = "service"
