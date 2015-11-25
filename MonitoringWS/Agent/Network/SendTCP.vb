@@ -19,7 +19,6 @@ Public Class SendTCP
     Private Sub ConnectCallback(ByVal ar As IAsyncResult)
         Dim PClass As New Packets
         Dim Packet = PClass.CreatePacket()
-
         NetworkLog.WriteToLog("Agent connected to " & AgentServer & " on port " & TCPSendPort)
 
         Try
@@ -27,21 +26,15 @@ Public Class SendTCP
             Dim NStream As NetworkStream = Client.GetStream
             Dim PacketData As Byte() = Encoding.ASCII.GetBytes(Packet)
             NStream.Write(PacketData, 0, PacketData.Length)
-
             NetworkLog.WriteToLog("Sending packet")
-
             'Client.ReceiveBufferSize = 1024
-
             Dim Message As String = Nothing
             Dim Reader As New StreamReader(NStream)
             While Reader.Peek > -1
                 Message = Message + Convert.ToChar(Reader.Read)
             End While
             Client.Close()
-            'Console.WriteLine("[CLIENT] " & Message)
-
             NetworkLog.WriteToLog(Message)
-
         Catch ex As Exception
         Finally
             Dim Database As New Agent.Database
