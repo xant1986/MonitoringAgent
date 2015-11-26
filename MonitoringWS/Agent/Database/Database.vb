@@ -47,9 +47,10 @@ Namespace Agent
             For Each i In AgentDataList
                 i.AgentDataSent = True
             Next
+        End Sub
 
+        Public Sub PurgeTables()
             Dim PurgeDate = AgentDate.AddDays(-7)
-
             'Purge data older than 7 days
             AgentDataList.RemoveAll(Function(x) x.AgentDate < PurgeDate)
         End Sub
