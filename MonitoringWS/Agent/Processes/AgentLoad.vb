@@ -36,7 +36,7 @@ Public Class AgentLoad
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
                     writer.WriteAttributeString("parameter", "version")
-                    writer.WriteAttributeString("value", "1.0")
+                    writer.WriteAttributeString("value", "2.0.0")
                     writer.WriteEndElement()
 
                     'For testing we are sending to the localhost
