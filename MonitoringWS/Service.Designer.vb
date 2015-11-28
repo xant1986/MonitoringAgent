@@ -41,8 +41,11 @@ Partial Class Service
     ' Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container()
-        Me.ServiceName = "Service1"
+        '
+        'Service
+        '
+        Me.ServiceName = "MonitoringWS"
+
     End Sub
 
 End Class
