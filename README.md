@@ -1,18 +1,31 @@
-# Monitoring Agent 2.0.1
+# Monitoring Agent 2.0.2
 
 This is a VB.Net Windows Service WMI Monitoring Agent
 
 This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, logs it to a database and has the capability to send the data to a central server. It is built as a Windows service and runs every minute by default. Since this is a Windows service it is somewhat difficult to test so I have also created a second repository for a Console Application version of the Agent. Please use that if you are looking to learn the inner workings of this agent.
 
+
+Changes for Version 2.0.2 (2015/11/29):
+
+1.  Changed Default TCP Send port to 10001.
+
 Changes for Version 2.0.1 (2015/11/26):
+
 1. TCP connections now error correctly
+
 2. Data that is not sent due to TCP errors will be sent when the connection is reestablished
 
+
 Changes for Version 2.0.0 (2015/11/24):
+
 1. TCP connections now use asynchronous communication.
+
 2. TCP logging has been enabled by default.
+
 3. Most of the Public subroutines were converted from shared to instances.
+
 4. Installation path has changed.
+
 
 Application Installer:
 
@@ -30,7 +43,7 @@ object class="windows" parameter="service" value="ServiceName"
 
 Network Information:
 
-This application sends data over TCP port 10000 by default and receives traffic on port 10000. This values can be changed in the AgentConfiguration.xml file. The Agent is also configured to accept new encrypted xml configuration files over port 10000.
+This application sends data over TCP port 10001 by default and receives traffic on port 10000. This values can be changed in the AgentConfiguration.xml file. The Agent is also configured to accept new encrypted xml configuration files over port 10000.
 
 Security/Encryption:
 

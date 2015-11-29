@@ -58,7 +58,7 @@ Public Class AgentLoad
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
                     writer.WriteAttributeString("parameter", "tcp_send")
-                    writer.WriteAttributeString("value", "10000")
+                    writer.WriteAttributeString("value", "10001")
                     writer.WriteEndElement()
 
                     writer.WriteStartElement("object")
