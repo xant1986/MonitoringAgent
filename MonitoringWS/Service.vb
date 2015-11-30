@@ -3,17 +3,18 @@ Imports System.Threading
 
 Public Class Service
 
+    Private AgentReceiveThread As Thread
+    Private AgentCollectThread As Thread
+
     Protected Overrides Sub OnStart(ByVal args() As String)
-        ' Add code here to start your service. This method should set things
-        ' in motion so your service can do its work.
 
         Dim AgentLoad As New AgentLoad
         AgentLoad.LoadParameters()
 
         Dim nReceive As New ReceiveTCP
-        Dim t As Thread
-        t = New Thread(AddressOf nReceive.StartListener)
-        t.Start()
+
+        AgentReceiveThread = New Thread(AddressOf nReceive.StartListener)
+        AgentReceiveThread.Start()
 
         Dim LaunchTimer As New Timers.Timer
         AddHandler LaunchTimer.Elapsed, AddressOf Tick
@@ -24,14 +25,21 @@ Public Class Service
     End Sub
 
     Protected Overrides Sub OnStop()
-        ' Add code here to perform any tear-down necessary to stop your service.
+
+        If AgentReceiveThread.IsAlive = True Then
+            AgentReceiveThread.Abort()
+        End If
+
+        If AgentCollectThread.IsAlive = True Then
+            AgentCollectThread.Abort()
+        End If
+
     End Sub
 
     Private Sub Tick(sender As System.Object, e As System.EventArgs)
         Dim AgentWMI As New AgentWMI
-        Dim t As Thread
-        t = New Thread(AddressOf AgentWMI.GetWMI)
-        t.Start()
+        AgentCollectThread = New Thread(AddressOf AgentWMI.GetWMI)
+        AgentCollectThread.Start()
     End Sub
 
 End Class

@@ -1,9 +1,13 @@
-# Monitoring Agent 2.0.2
+# Monitoring Agent 2.0.3
 
 This is a VB.Net Windows Service WMI Monitoring Agent
 
 This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, logs it to a database and has the capability to send the data to a central server. It is built as a Windows service and runs every minute by default. Since this is a Windows service it is somewhat difficult to test so I have also created a second repository for a Console Application version of the Agent. Please use that if you are looking to learn the inner workings of this agent.
 
+
+Changes for Version 2.0.3 (2015/11/30):
+
+1.  Added code to abort threads on service stop.
 
 Changes for Version 2.0.2 (2015/11/29):
 
@@ -29,7 +33,7 @@ Changes for Version 2.0.0 (2015/11/24):
 
 Application Installer:
 
-This Agent uses the Visual Studio installer. It will install the Agent by default to C:\Program Files\wcpSoft\M2. This can be changed during setup. The agent is also by default set to Automatic startup and runs under the local system account.
+This Agent uses the Visual Studio installer. It will install the Agent by default to C:\Program Files\wcpSoft\MonitoringAgent. This can be changed during setup. The agent is also by default set to Automatic startup and runs under the local system account.
 
 Configuration and Data files:
 
