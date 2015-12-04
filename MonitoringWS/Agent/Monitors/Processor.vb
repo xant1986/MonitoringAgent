@@ -26,6 +26,9 @@ Namespace Agent
 
             Try
                 Dim ProcessorPercent As Integer = Round(((1 - ((wmiDataList.Item(0) - wmiDataList.Item(2)) / (wmiDataList.Item(1) - wmiDataList.Item(3)))) * 100), 2)
+                If ProcessorPercent < 0 Then
+                    ProcessorPercent = 0
+                End If
                 Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "Processor", .AgentProperty = "Total Util (%)", .AgentValue = ProcessorPercent, .AgentInstance = 0})
             Catch ex As Exception
             End Try

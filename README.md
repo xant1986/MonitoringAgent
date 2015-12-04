@@ -1,9 +1,12 @@
-# Monitoring Agent 2.0.3
+# Monitoring Agent 2.0.4
 
 This is a VB.Net Windows Service WMI Monitoring Agent
 
 This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, logs it to a database and has the capability to send the data to a central server. It is built as a Windows service and runs every minute by default. Since this is a Windows service it is somewhat difficult to test so I have also created a second repository for a Console Application version of the Agent. Please use that if you are looking to learn the inner workings of this agent.
 
+Changes for Version 2.0.4 (2015/12/04):
+
+1.  Fixed an issue where the CPU was reporting a negative value.
 
 Changes for Version 2.0.3 (2015/11/30):
 
