@@ -36,6 +36,7 @@ Public Class SendTCP
             While Reader.Peek > -1
                 Message = Message + Convert.ToChar(Reader.Read)
             End While
+            NStream.Close()
             Client.Close()
             NetworkLog.WriteToLog(Message)
             Database.UpdateTables()

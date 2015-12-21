@@ -12,12 +12,12 @@ Public Class AgentWMI
         Dim Processor As New Agent.Processor
         Dim Services As New Agent.Services
 
-        ComputerSystem.GetComputerSystem()
-        LogicalDisk.GetLogicalDisk()
-        Memory.GetMemory()
-        Network.GetNetwork()
         OperatingSystem.GetOperatingSystem()
+        ComputerSystem.GetComputerSystem()
+        Network.GetNetwork()
         Processor.GetProcessor()
+        Memory.GetMemory()
+        LogicalDisk.GetLogicalDisk()
         Services.GetServices()
 
         Dim SendTCP As New SendTCP

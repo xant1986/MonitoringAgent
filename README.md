@@ -1,14 +1,23 @@
-# Monitoring Agent 2.0.6
+# Monitoring Agent 2.1.0
 
 This is a VB.Net Windows Service WMI Monitoring Agent
 
 This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, logs it to a database and has the capability to send the data to a central server. It is built as a Windows service and runs every minute by default. Since this is a Windows service it is somewhat difficult to test so I have also created a second repository for a Console Application version of the Agent. Please use that if you are looking to learn the inner workings of this agent.
 
 
+Changes for Version 2.1.0 (2015/12/21):
+
+1.  Fixed bug closing network stream. 
+
+2.  Changed configuration to remove instance and rewrote parameter as property.  Please use the latest Version of the server app as well to insure compatibility.
+
+3.  Changed CPU collection to use Preformatted WMI data.
+
+4.  Set several default service parameters.  This will most likely be refined in a future update.
+
 Changes for Version 2.0.6 (2015/12/20):
 
 1.  Set installer to 64bit default.
-
 
 Changes for Version 2.0.4 (2015/12/04):
 
@@ -27,7 +36,6 @@ Changes for Version 2.0.1 (2015/11/26):
 1. TCP connections now error correctly
 
 2. Data that is not sent due to TCP errors will be sent when the connection is reestablished
-
 
 Changes for Version 2.0.0 (2015/11/24):
 
@@ -52,7 +60,7 @@ AgentConfiguration.xml is the Agent configuration. It is also created when the a
 
 To configure services add a new line with the following values.
 
-object class="windows" parameter="service" value="ServiceName"
+object class="windows" property="service" value="ServiceName"
 
 Network Information:
 

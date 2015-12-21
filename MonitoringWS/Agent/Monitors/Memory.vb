@@ -20,7 +20,7 @@ Namespace Agent
 
             Try
                 Dim MemoryPercent As Integer = Round(((wmiDataList.Item(1) - wmiDataList.Item(0)) / wmiDataList.Item(1)) * 100)
-                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "Memory", .AgentProperty = "Total Util (%)", .AgentValue = MemoryPercent, .AgentInstance = 0})
+                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "Memory", .AgentProperty = "Total Util (%)", .AgentValue = MemoryPercent})
             Catch ex As Exception
             End Try
 

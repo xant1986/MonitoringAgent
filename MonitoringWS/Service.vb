@@ -1,4 +1,4 @@
-﻿'MonitoringWS Version 2.0.5 
+﻿'MonitoringWS Version 2.1.0
 'Copyright 2015 Phil White, wcpSoft
 'This software is released under the Apache 2.0 License
 'Maintained at http://github.com/philipcwhite

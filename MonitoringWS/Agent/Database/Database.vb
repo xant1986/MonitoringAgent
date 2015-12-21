@@ -26,7 +26,6 @@ Namespace Agent
                         writer.WriteAttributeString("date", i.AgentDate)
                         writer.WriteAttributeString("class", i.AgentClass)
                         writer.WriteAttributeString("property", i.AgentProperty)
-                        writer.WriteAttributeString("instance", i.AgentInstance)
                         writer.WriteAttributeString("value", i.AgentValue.ToString)
                         writer.WriteAttributeString("sent", i.AgentDataSent.ToString)
                         writer.WriteEndElement()

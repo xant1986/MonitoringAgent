@@ -6,7 +6,7 @@ Namespace Agent
         Public Sub GetServices()
 
             Dim Q = From T In Database.AgentConfigurationList
-                    Where T.AgentClass = "windows" And T.AgentParameter = "service"
+                    Where T.AgentClass = "windows" And T.AgentProperty = "service"
                     Select T.AgentValue
             For Each i In Q
                 Dim qString As String = "SELECT * FROM Win32_Service where Name='" & i & "'"
@@ -19,7 +19,7 @@ Namespace Agent
                         Else
                             State = 0
                         End If
-                        Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "Services", .AgentProperty = queryObj("DisplayName"), .AgentValue = State, .AgentInstance = 0})
+                        Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "Services", .AgentProperty = queryObj("DisplayName"), .AgentValue = State})
                     Next
                 Catch err As ManagementException
                 End Try

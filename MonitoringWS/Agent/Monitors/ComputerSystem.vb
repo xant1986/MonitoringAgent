@@ -25,9 +25,9 @@ Namespace Agent
             Try
                 TotalMemory = Round(wmiDataList.Item(2) / 1024 / 1024)
 
-                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "Domain", .AgentValue = wmiDataList.Item(0), .AgentInstance = 0})
-                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "Processors", .AgentValue = wmiDataList.Item(1), .AgentInstance = 0})
-                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "Total Memory (MB)", .AgentValue = TotalMemory, .AgentInstance = 0})
+                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "Domain", .AgentValue = wmiDataList.Item(0)})
+                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "Processors", .AgentValue = wmiDataList.Item(1)})
+                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "Total Memory (MB)", .AgentValue = TotalMemory})
             Catch ex As Exception
             End Try
 

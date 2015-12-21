@@ -35,45 +35,80 @@ Public Class AgentLoad
 
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
-                    writer.WriteAttributeString("parameter", "version")
-                    writer.WriteAttributeString("value", "2.0.4")
+                    writer.WriteAttributeString("property", "version")
+                    writer.WriteAttributeString("value", "2.0.7")
                     writer.WriteEndElement()
 
                     'For testing we are sending to the localhost
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
-                    writer.WriteAttributeString("parameter", "server")
+                    writer.WriteAttributeString("property", "server")
                     writer.WriteAttributeString("value", "localhost")
                     writer.WriteEndElement()
 
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
-                    writer.WriteAttributeString("parameter", "tcp_listen")
+                    writer.WriteAttributeString("property", "tcp_listen")
                     writer.WriteAttributeString("value", "10000")
                     writer.WriteEndElement()
 
-                    'We are sending data to the agent for display.  Normally we would configure this
-                    'port to go to a server Application
-
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
-                    writer.WriteAttributeString("parameter", "tcp_send")
+                    writer.WriteAttributeString("property", "tcp_send")
                     writer.WriteAttributeString("value", "10001")
                     writer.WriteEndElement()
 
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
-                    writer.WriteAttributeString("parameter", "poll_period")
+                    writer.WriteAttributeString("property", "poll_period")
                     writer.WriteAttributeString("value", "1")
                     writer.WriteEndElement()
 
-                    'Adding a sample Windows Service
-                    writer.WriteStartElement("object")
-                    writer.WriteAttributeString("class", "windows")
-                    writer.WriteAttributeString("parameter", "service")
-                    writer.WriteAttributeString("value", "LanmanServer")
-                    writer.WriteEndElement()
+                    'Adding default Windows Services
 
+                    Dim ServiceList As New List(Of String)
+                    ServiceList.Add("AppHostSvc")
+                    ServiceList.Add("BrokerInfrastructure")
+                    ServiceList.Add("BFE")
+                    ServiceList.Add("EventSystem")
+                    ServiceList.Add("CryptSvc")
+                    ServiceList.Add("DcomLaunch")
+                    ServiceList.Add("Dhcp")
+                    ServiceList.Add("DPS")
+                    ServiceList.Add("DiagTrack")
+                    ServiceList.Add("TrkWks")
+                    ServiceList.Add("iphlpsvc")
+                    ServiceList.Add("LSM")
+                    ServiceList.Add("NlaSvc")
+                    ServiceList.Add("nsi")
+                    ServiceList.Add("Power")
+                    ServiceList.Add("Spooler")
+                    ServiceList.Add("PcaSvc")
+                    ServiceList.Add("RpcSs")
+                    ServiceList.Add("RpcEptMapper")
+                    ServiceList.Add("SamSs")
+                    ServiceList.Add("LanmanServer")
+                    ServiceList.Add("ShellHWDetection")
+                    ServiceList.Add("SysMain")
+                    ServiceList.Add("SENS")
+                    ServiceList.Add("Schedule")
+                    ServiceList.Add("Themes")
+                    ServiceList.Add("ProfSvc")
+                    ServiceList.Add("Audiosrv")
+                    ServiceList.Add("WinDefend")
+                    ServiceList.Add("EventLog")
+                    ServiceList.Add("MpsSvc")
+                    ServiceList.Add("FontCache")
+                    ServiceList.Add("Winmgmt")
+                    ServiceList.Add("LanmanWorkstation")
+
+                    For Each i In ServiceList
+                        writer.WriteStartElement("object")
+                        writer.WriteAttributeString("class", "windows")
+                        writer.WriteAttributeString("property", "service")
+                        writer.WriteAttributeString("value", i)
+                        writer.WriteEndElement()
+                    Next
 
                     writer.WriteEndElement()
                     writer.WriteEndDocument()
@@ -94,7 +129,7 @@ Public Class AgentLoad
             Dim xmlobjects As IEnumerable(Of XElement) = xelement.Elements("object")
 
             For Each i In xmlobjects
-                AgentConfigurationList.Add(New AgentConfiguration With {.AgentClass = i.Attribute("class").Value, .AgentParameter = i.Attribute("parameter").Value, .AgentValue = i.Attribute("value").Value})
+                AgentConfigurationList.Add(New AgentConfiguration With {.AgentClass = i.Attribute("class").Value, .AgentProperty = i.Attribute("property").Value, .AgentValue = i.Attribute("value").Value})
             Next
 
             Dim Q = From T In AgentConfigurationList
@@ -102,7 +137,7 @@ Public Class AgentLoad
                     Select T
 
             For Each i In Q
-                Select Case i.AgentParameter
+                Select Case i.AgentProperty
                     Case "version"
                         AgentVersion = i.AgentValue
                     Case "server"
@@ -130,7 +165,7 @@ Public Class AgentLoad
             Dim xmlobjects As IEnumerable(Of XElement) = xelement.Elements("object")
 
             For Each i In xmlobjects
-                Database.AgentDataList.Add(New AgentData With {.AgentName = i.Attribute("name").Value, .AgentClass = i.Attribute("class").Value, .AgentProperty = i.Attribute("property").Value, .AgentValue = i.Attribute("value").Value, .AgentDate = i.Attribute("date").Value, .AgentInstance = i.Attribute("instance").Value, .AgentDataSent = i.Attribute("sent").Value})
+                Database.AgentDataList.Add(New AgentData With {.AgentName = i.Attribute("name").Value, .AgentClass = i.Attribute("class").Value, .AgentProperty = i.Attribute("property").Value, .AgentValue = i.Attribute("value").Value, .AgentDate = i.Attribute("date").Value, .AgentDataSent = i.Attribute("sent").Value})
             Next
 
         Catch ex As Exception

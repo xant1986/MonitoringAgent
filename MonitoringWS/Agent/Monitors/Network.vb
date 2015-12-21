@@ -1,6 +1,5 @@
 ﻿Imports System.Management
 
-
 Namespace Agent
     Public Class Network
 
@@ -20,7 +19,7 @@ Namespace Agent
             Try
                 Dim IPAddressList As New List(Of String)
                 IPAddressList.AddRange(wmiDataList.Item(0))
-                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "IP Address", .AgentValue = IPAddressList.Item(0), .AgentInstance = 0})
+                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "IP Address", .AgentValue = IPAddressList.Item(0)})
             Catch ex As Exception
             End Try
 

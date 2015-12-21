@@ -19,9 +19,9 @@ Namespace Agent
             End Try
 
             Try
-                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "Version", .AgentValue = wmiDataList.Item(0), .AgentInstance = 0})
-                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "Build Number", .AgentValue = wmiDataList.Item(1), .AgentInstance = 0})
-                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "OS Architecture", .AgentValue = wmiDataList.Item(2), .AgentInstance = 0})
+                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "Version", .AgentValue = wmiDataList.Item(0)})
+                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "Build Number", .AgentValue = wmiDataList.Item(1)})
+                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentDate = AgentParameters.AgentDate, .AgentClass = "System", .AgentProperty = "OS Architecture", .AgentValue = wmiDataList.Item(2)})
             Catch ex As Exception
             End Try
 
