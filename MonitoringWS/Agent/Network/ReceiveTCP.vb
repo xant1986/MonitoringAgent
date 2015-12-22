@@ -43,8 +43,8 @@ Public Class ReceiveTCP
         Dim ResponseBytes As Byte() = Encoding.ASCII.GetBytes(ResponseString)
         Dim ReturnStream As NetworkStream = tcpClient.GetStream
         ReturnStream.Write(ResponseBytes, 0, ResponseBytes.Length)
-        tcpClient.Close()
-        NStream.Close()
+        'tcpClient.Close()
+        'NStream.Close()
         TranslateXML(Message)
         tcpClientConnected.Set()
     End Sub

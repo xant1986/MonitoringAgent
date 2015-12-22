@@ -19,32 +19,43 @@ Public Class SendTCP
     Private Sub ConnectCallback(ByVal ar As IAsyncResult)
         Dim PClass As New Packets
         Dim Packet = PClass.CreatePacket()
-
-
         Dim Database As New Agent.Database
         Dim Message As String = Nothing
-        Dim Client As TcpClient = CType(ar.AsyncState, TcpClient)
 
-        If Client.Connected Then
-            NetworkLog.WriteToLog("Agent connected to " & AgentServer & " on port " & TCPSendPort)
-            Dim NStream As NetworkStream = Client.GetStream
-            Dim PacketData As Byte() = Encoding.ASCII.GetBytes(Packet)
-            NStream.Write(PacketData, 0, PacketData.Length)
-            NetworkLog.WriteToLog("Sending packet")
+        Try
+            Dim Client As TcpClient = CType(ar.AsyncState, TcpClient)
 
-            Dim Reader As New StreamReader(NStream)
-            While Reader.Peek > -1
-                Message = Message + Convert.ToChar(Reader.Read)
-            End While
-            NStream.Close()
-            Client.Close()
-            NetworkLog.WriteToLog(Message)
+            If Client.Connected Then
+                NetworkLog.WriteToLog("Agent connected to " & AgentServer & " on port " & TCPSendPort)
+                Dim NStream As NetworkStream = Client.GetStream
+                Dim PacketData As Byte() = Encoding.ASCII.GetBytes(Packet)
+                NStream.Write(PacketData, 0, PacketData.Length)
+                NetworkLog.WriteToLog("Sending packet")
+
+                Dim Reader As New StreamReader(NStream)
+                While Reader.Peek > -1
+                    Message = Message + Convert.ToChar(Reader.Read)
+                End While
+                NStream.Close()
+                Client.Close()
+                NetworkLog.WriteToLog(Message)
+
+            Else
+                NetworkLog.WriteToLog("Connection failed")
+            End If
+
+        Catch ex As Exception
+            NetworkLog.WriteToLog(ex.ToString)
+        End Try
+
+
+        Try
             Database.UpdateTables()
-        Else
-            NetworkLog.WriteToLog("Connection failed")
-        End If
-        Database.PurgeTables()
-        Database.SaveDatabase()
+            Database.PurgeTables()
+            Database.SaveDatabase()
+        Catch ex As Exception
+            NetworkLog.WriteToLog(ex.ToString)
+        End Try
 
     End Sub
 
