@@ -1,8 +1,21 @@
-# Monitoring Agent 2.1.0
+# Monitoring Agent 2.2.0
 
 This is a VB.Net Windows Service WMI Monitoring Agent
 
-This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, logs it to a database and has the capability to send the data to a central server. It is built as a Windows service and runs every minute by default. Since this is a Windows service it is somewhat difficult to test so I have also created a second repository for a Console Application version of the Agent. Please use that if you are looking to learn the inner workings of this agent.
+This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, and sends the data to a central server. It works in conjuntion with the Monitoring Server application.
+
+
+Changes for Version 2.2.0 (2015/12/27):
+
+This is the most significant change to the agent to date.  The agent now runs in memory and does not write the database to disk.  I will add some debugging to re-enable writing data to disk at a later time.  Something like send to self.  TCP Receive was not currently being used so I removed it for security reasons.
+
+1.  Removed TCP receive, Agent Database
+
+2.  Updated XML packets to provide a cleaner more consistant packet.  
+
+3.  Failed data is no longer resent
+
+4.  Performance has improved significantly especially on the server side.  
 
 
 Changes for Version 2.1.0 (2015/12/21):
