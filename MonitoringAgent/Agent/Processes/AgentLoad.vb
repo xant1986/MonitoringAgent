@@ -34,7 +34,7 @@ Public Class AgentLoad
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
                     writer.WriteAttributeString("property", "version")
-                    writer.WriteAttributeString("value", "2.2.0")
+                    writer.WriteAttributeString("value", "2.2.5")
                     writer.WriteEndElement()
 
                     'For testing we are sending to the localhost
@@ -48,12 +48,6 @@ Public Class AgentLoad
                     writer.WriteAttributeString("class", "agent")
                     writer.WriteAttributeString("property", "tcp_send")
                     writer.WriteAttributeString("value", "10000")
-                    writer.WriteEndElement()
-
-                    writer.WriteStartElement("object")
-                    writer.WriteAttributeString("class", "agent")
-                    writer.WriteAttributeString("property", "poll_period")
-                    writer.WriteAttributeString("value", "1")
                     writer.WriteEndElement()
 
                     writer.WriteEndElement()
@@ -89,8 +83,6 @@ Public Class AgentLoad
                         AgentServer = i.AgentValue
                     Case "tcp_send"
                         TCPSendPort = i.AgentValue
-                    Case "poll_period"
-                        AgentPollPeriod = i.AgentValue
                 End Select
             Next
 

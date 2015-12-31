@@ -34,6 +34,7 @@ Namespace Agent
 
         End Sub
 
+
         Public Sub GetMemory()
 
             Dim wmiDataList As New List(Of String)

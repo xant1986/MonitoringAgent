@@ -1,11 +1,16 @@
-# Monitoring Agent 2.2.0
+# Monitoring Agent 2.2.5
 
 This is a VB.Net Windows Service WMI Monitoring Agent
 
 This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, and sends the data to a central server. It works in conjuntion with the Monitoring Server application.
 
 
-Changes for Version 2.2.0 (2015/12/27):
+##Changes for Version 2.2.5 (2015/12/31):
+
+1.  Set agent to run at 5 minute intervals based on system time.  So the agent will run at 00,05,10,15 mins etc.  This was done to comply with graphing on the server side which is coming soon.  
+ 
+
+##Changes for Version 2.2.0 (2015/12/27):
 
 This is the most significant change to the agent to date.  The agent now runs in memory and does not write the database to disk.  I will add some debugging to re-enable writing data to disk at a later time.  Something like send to self.  TCP Receive was not currently being used so I removed it for security reasons.
 
@@ -18,7 +23,7 @@ This is the most significant change to the agent to date.  The agent now runs in
 4.  Performance has improved significantly especially on the server side.  
 
 
-Changes for Version 2.1.0 (2015/12/21):
+##Changes for Version 2.1.0 (2015/12/21):
 
 1.  Fixed bug closing network stream. 
 
@@ -28,11 +33,12 @@ Changes for Version 2.1.0 (2015/12/21):
 
 4.  Set several default service parameters.  This will most likely be refined in a future update.
 
-Changes for Version 2.0.6 (2015/12/20):
+##Changes for Version 2.0.6 (2015/12/20):
 
 1.  Set installer to 64bit default.
 
-Changes for Version 2.0.4 (2015/12/04):
+
+##Changes for Version 2.0.4 (2015/12/04):
 
 1.  Fixed an issue where the CPU was reporting a negative value.
 
@@ -40,17 +46,20 @@ Changes for Version 2.0.3 (2015/11/30):
 
 1.  Added code to abort threads on service stop.
 
-Changes for Version 2.0.2 (2015/11/29):
+
+##Changes for Version 2.0.2 (2015/11/29):
 
 1.  Changed Default TCP Send port to 10001.
 
-Changes for Version 2.0.1 (2015/11/26):
+
+##Changes for Version 2.0.1 (2015/11/26):
 
 1. TCP connections now error correctly
 
 2. Data that is not sent due to TCP errors will be sent when the connection is reestablished
 
-Changes for Version 2.0.0 (2015/11/24):
+
+##Changes for Version 2.0.0 (2015/11/24):
 
 1. TCP connections now use asynchronous communication.
 
@@ -67,8 +76,6 @@ This Agent uses the Visual Studio installer. It will install the Agent by defaul
 
 Configuration and Data files:
 
-AgentDatabase.xml is the Agent database. It is created when the agent is started.
-
 AgentConfiguration.xml is the Agent configuration. It is also created when the agent is started.
 
 To configure services add a new line with the following values.
@@ -77,7 +84,7 @@ object class="windows" property="service" value="ServiceName"
 
 Network Information:
 
-This application sends data over TCP port 10001 by default and receives traffic on port 10000. This values can be changed in the AgentConfiguration.xml file. The Agent is also configured to accept new encrypted xml configuration files over port 10000.
+This application sends data over TCP port 10000 by default. This values can be changed in the AgentConfiguration.xml file.
 
 Security/Encryption:
 

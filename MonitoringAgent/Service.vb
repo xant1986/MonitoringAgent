@@ -1,4 +1,4 @@
-﻿'MonitoringAgent Version 2.2.0
+﻿'MonitoringAgent Version 2.2.5
 'Copyright 2015 Phil White, wcpSoft
 'This software is released under the Apache 2.0 License
 'Maintained at http://github.com/philipcwhite
@@ -17,7 +17,7 @@ Public Class Service
 
         Dim Timer As New Timers.Timer
         AddHandler Timer.Elapsed, AddressOf Tick
-        Timer.Interval = AgentPollPeriod * 60000
+        Timer.Interval = 1000
         Timer.Enabled = True
         Timer.Start()
 
@@ -33,10 +33,16 @@ Public Class Service
     End Sub
 
     Private Sub Tick(sender As System.Object, e As System.EventArgs)
-        Dim ATransaction As New AgentTransaction
-        AgentCollectThread = New Thread(AddressOf ATransaction.RunTransaction)
-        AgentCollectThread.IsBackground = True
-        AgentCollectThread.Start()
+
+        Dim SystemTime As Date = Date.Now
+        If SystemTime.ToString("mm:ss").Substring(1, 4) = "5:00" Or SystemTime.ToString("mm:ss").Substring(1, 4) = "0:00" Then
+            AgentDate = SystemTime
+            Dim ATransaction As New AgentTransaction
+            AgentCollectThread = New Thread(AddressOf ATransaction.RunTransaction)
+            AgentCollectThread.IsBackground = True
+            AgentCollectThread.Start()
+        End If
+
     End Sub
 
 End Class

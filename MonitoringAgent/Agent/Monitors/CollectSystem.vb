@@ -1,4 +1,5 @@
-﻿Imports System.Management
+﻿Imports MonitoringAgent.Agent.AgentParameters
+Imports System.Management
 Imports System.Math
 
 Namespace Agent
@@ -18,7 +19,7 @@ Namespace Agent
             GetComputerSystem()
             GetOperatingSystem()
             GetNetwork()
-            Database.AgentSystemList.Add(New AgentSystem With {.AgentName = AgentName, .AgentDomain = AgentDomain, .AgentIP = AgentIP, .AgentOSName = AgentOSName, .AgentOSBuild = AgentOSBuild, .AgentOSArchitecture = AgentOSArchitecture, .AgentProcessors = AgentProcessors, .AgentMemory = AgentMemory, .AgentDate = Date.Now})
+            Database.AgentSystemList.Add(New AgentSystem With {.AgentName = AgentName, .AgentDomain = AgentDomain, .AgentIP = AgentIP, .AgentOSName = AgentOSName, .AgentOSBuild = AgentOSBuild, .AgentOSArchitecture = AgentOSArchitecture, .AgentProcessors = AgentProcessors, .AgentMemory = AgentMemory, .AgentDate = AgentDate})
 
         End Sub
 

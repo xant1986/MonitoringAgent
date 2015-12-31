@@ -2,10 +2,9 @@
     Public Class AgentParameters
 
         'Agent Parameters
-        Public Shared AgentDate As Date = Date.Now
+        Public Shared AgentDate As Date = Nothing
         Public Shared AgentName As String = Net.Dns.GetHostName
         Public Shared AgentPath As String = Reflection.Assembly.GetEntryAssembly.Location.Replace("MonitoringAgent.exe", "")
-        Public Shared AgentPollPeriod As Integer = 1
         Public Shared AgentServer As String = Nothing
         Public Shared AgentVersion As String = Nothing
         Public Shared TCPSendPort As String = Nothing
