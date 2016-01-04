@@ -5,12 +5,17 @@ This is a VB.Net Windows Service WMI Monitoring Agent
 This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, and sends the data to a central server. It works in conjuntion with the Monitoring Server application.
 
 
-##Changes for Version 2.2.5 (2015/12/31):
+###Changes for Version 2.2.5 (2016/01/04):
+
+1.  Added Monitors for Pagefile and Logical Disk Performance.  Removed MB Free.
+
+
+###Changes for Version 2.2.5 (2015/12/31):
 
 1.  Set agent to run at 5 minute intervals based on system time.  So the agent will run at 00,05,10,15 mins etc.  This was done to comply with graphing on the server side which is coming soon.  
  
 
-##Changes for Version 2.2.0 (2015/12/27):
+###Changes for Version 2.2.0 (2015/12/27):
 
 This is the most significant change to the agent to date.  The agent now runs in memory and does not write the database to disk.  I will add some debugging to re-enable writing data to disk at a later time.  Something like send to self.  TCP Receive was not currently being used so I removed it for security reasons.
 
@@ -23,7 +28,7 @@ This is the most significant change to the agent to date.  The agent now runs in
 4.  Performance has improved significantly especially on the server side.  
 
 
-##Changes for Version 2.1.0 (2015/12/21):
+###Changes for Version 2.1.0 (2015/12/21):
 
 1.  Fixed bug closing network stream. 
 
@@ -38,7 +43,7 @@ This is the most significant change to the agent to date.  The agent now runs in
 1.  Set installer to 64bit default.
 
 
-##Changes for Version 2.0.4 (2015/12/04):
+###Changes for Version 2.0.4 (2015/12/04):
 
 1.  Fixed an issue where the CPU was reporting a negative value.
 
@@ -47,19 +52,19 @@ Changes for Version 2.0.3 (2015/11/30):
 1.  Added code to abort threads on service stop.
 
 
-##Changes for Version 2.0.2 (2015/11/29):
+###Changes for Version 2.0.2 (2015/11/29):
 
 1.  Changed Default TCP Send port to 10001.
 
 
-##Changes for Version 2.0.1 (2015/11/26):
+###Changes for Version 2.0.1 (2015/11/26):
 
 1. TCP connections now error correctly
 
 2. Data that is not sent due to TCP errors will be sent when the connection is reestablished
 
 
-##Changes for Version 2.0.0 (2015/11/24):
+###Changes for Version 2.0.0 (2015/11/24):
 
 1. TCP connections now use asynchronous communication.
 
@@ -92,4 +97,4 @@ This aplication uses a weak version of AES packet encryption over TCP. Please ch
 
 About the Author:
 
-My name is Phil White and I have been working with enterprise system monitoring solutions for over 8 years. I enjoy learning new technology, writing code, and playing guitar in my free time. I hope you find my applications useful. 
+My name is Phil White and I have been working with enterprise system monitoring solutions for over 9 years. I enjoy learning new technology, writing code, and playing guitar in my free time. I hope you find my applications useful. 
