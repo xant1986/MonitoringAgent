@@ -1,8 +1,14 @@
-# Monitoring Agent 2.2.5
+# Monitoring Agent 2.3.5
 
 This is a VB.Net Windows Service WMI Monitoring Agent
 
 This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, and sends the data to a central server. It works in conjuntion with the Monitoring Server application.
+
+###Changes for Version 2.3.5 (2016/01/15):
+
+1.  Implemented SSL using TLS 1.2.  This is still not the most secure due to fact that I am not verifying certificates and the agent does not require a certificate.  We are just accepting anything.  You can use your own server cert with the Monitoring Server.  I will make an option later to verify the cert.  I switched from custom encryption to this incase I build a linux agent later or someone else decides to.  The TCP server should accept any valid TLS 1.2 connections.  The new default behavior of the agent and the server is to use non-encrypted TCP connections.  It's faster, lower overhead, and this is monitoring data which despite what some say, is not sensitive data.  If you are using the agent or monitoring server you must upgrade to use this.  
+
+2.  I will most likely be updating the build numbers to match the monitoring server as we get closer to a production release.  Also I do still plan to make an option for the agent to send data to itself.  This will let you do whatever you want with the agent.   
 
 
 ###Changes for Version 2.2.5 (2016/01/04):

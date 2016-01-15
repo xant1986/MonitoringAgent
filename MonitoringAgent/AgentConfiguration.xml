@@ -1,7 +1,7 @@
 <agent-config>
-  <object class="agent" property="version" value="2.2.5" />
   <object class="agent" property="server" value="localhost" />
-  <object class="agent" property="tcp_send" value="10000" />
+  <object class="agent" property="tcp_port" value="10000" />
+  <object class="agent" property="ssl_enabled" value="False" />
   <object class="windows" property="service" value="AppHostSvc" />
   <object class="windows" property="service" value="BrokerInfrastructure" />
   <object class="windows" property="service" value="BFE" />

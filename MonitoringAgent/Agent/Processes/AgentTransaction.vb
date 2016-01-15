@@ -1,4 +1,5 @@
-﻿Imports MonitoringAgent.Agent.Database
+﻿Imports MonitoringAgent.Agent.AgentParameters
+Imports MonitoringAgent.Agent.Database
 Imports MonitoringAgent.Agent
 Public Class AgentTransaction
 
@@ -8,14 +9,18 @@ Public Class AgentTransaction
         GetWMI()
 
         'Send Data when WMI Collection is complete
-        Dim AgentSend As New SendTCP
-        AgentSend.SendData()
+        If SSLEnabled = True Then
+            Dim AgentSend As New SendSSL
+            AgentSend.SendData()
+        ElseIf SSLEnabled = False Then
+            Dim AgentSend As New SendTCP
+            AgentSend.SendData()
+        End If
 
     End Sub
 
 
     Private Sub GetWMI()
-
 
         'Initialize Database
         AgentSystemList.Clear()

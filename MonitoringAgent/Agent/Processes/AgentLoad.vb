@@ -31,12 +31,6 @@ Public Class AgentLoad
                     writer.WriteStartDocument()
                     writer.WriteStartElement("agent-config")
 
-                    writer.WriteStartElement("object")
-                    writer.WriteAttributeString("class", "agent")
-                    writer.WriteAttributeString("property", "version")
-                    writer.WriteAttributeString("value", "2.2.5")
-                    writer.WriteEndElement()
-
                     'For testing we are sending to the localhost
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
@@ -46,8 +40,14 @@ Public Class AgentLoad
 
                     writer.WriteStartElement("object")
                     writer.WriteAttributeString("class", "agent")
-                    writer.WriteAttributeString("property", "tcp_send")
+                    writer.WriteAttributeString("property", "tcp_port")
                     writer.WriteAttributeString("value", "10000")
+                    writer.WriteEndElement()
+
+                    writer.WriteStartElement("object")
+                    writer.WriteAttributeString("class", "agent")
+                    writer.WriteAttributeString("property", "ssl_enabled")
+                    writer.WriteAttributeString("value", "False")
                     writer.WriteEndElement()
 
                     writer.WriteEndElement()
@@ -76,18 +76,23 @@ Public Class AgentLoad
                     Select T
 
             For Each i In Q
-                Select Case i.AgentProperty
-                    Case "version"
-                        AgentVersion = i.AgentValue
-                    Case "server"
-                        AgentServer = i.AgentValue
-                    Case "tcp_send"
-                        TCPSendPort = i.AgentValue
-                End Select
+                If i.AgentProperty = "server" Then
+                    AgentServer = i.AgentValue
+                End If
+
+                If i.AgentProperty = "tcp_port" Then
+                    TCPSendPort = i.AgentValue
+                End If
+                If i.AgentProperty = "ssl_enabled" Then
+                    SSLEnabled = i.AgentValue
+                End If
+
             Next
 
         Catch
         End Try
+
+
 
     End Sub
 

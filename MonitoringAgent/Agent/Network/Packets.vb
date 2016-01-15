@@ -10,11 +10,9 @@ Public Class Packets
         Dim Packet As String = Nothing
 
         Dim Q1 = From T In AgentSystemList
-                 Where T.AgentDataSent = False
                  Select T
 
         Dim Q2 = From T In AgentDataList
-                 Where T.AgentDataSent = False
                  Select T
 
         Dim settings As XmlWriterSettings = New XmlWriterSettings()
@@ -60,8 +58,6 @@ Public Class Packets
         End Using
 
         Packet = SBuilder.ToString
-        Dim Encryption As New Encryption
-        Packet = Encryption.EncryptData(Packet)
 
         Return Packet
 

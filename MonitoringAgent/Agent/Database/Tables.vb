@@ -12,7 +12,6 @@
         Public Property AgentProperty As String
         Public Property AgentValue As String
         Public Property AgentDate As Date
-        Public Property AgentDataSent As Boolean = False
     End Class
 
     Public Class AgentSystem
@@ -25,7 +24,6 @@
         Public Property AgentProcessors As String
         Public Property AgentMemory As String
         Public Property AgentDate As String
-        Public Property AgentDataSent As Boolean = False
     End Class
 
 

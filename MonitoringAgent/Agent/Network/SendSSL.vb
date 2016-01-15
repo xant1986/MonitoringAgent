@@ -2,8 +2,11 @@
 Imports System.Net.Sockets
 Imports System.Text
 Imports System.IO
+Imports System.Net.Security
+Imports System.Security.Authentication
+Imports System.Security.Cryptography.X509Certificates
 
-Public Class SendTCP
+Public Class SendSSL
 
     Public NetworkLog As New NetworkLog
 
@@ -12,6 +15,7 @@ Public Class SendTCP
             NetworkLog.WriteToLog("Atempting to connect to " & AgentServer & " on port " & TCPSendPort)
             Dim Client As New TcpClient
             Client.BeginConnect(AgentServer, TCPSendPort, New AsyncCallback(AddressOf ConnectCallback), Client)
+            Threading.Thread.Sleep(5000)
         Catch ex As Exception
         End Try
     End Sub
@@ -24,22 +28,21 @@ Public Class SendTCP
 
         Try
             Dim Client As TcpClient = CType(ar.AsyncState, TcpClient)
-
             If Client.Connected Then
                 NetworkLog.WriteToLog("Agent connected to " & AgentServer & " on port " & TCPSendPort)
-                Dim NStream As NetworkStream = Client.GetStream
-                Dim PacketData As Byte() = Encoding.ASCII.GetBytes(Packet)
-                NStream.Write(PacketData, 0, PacketData.Length)
+                Dim sslstream = New SslStream(Client.GetStream, False, New RemoteCertificateValidationCallback(AddressOf TrustAllCertificatesCallback))
+                sslstream.AuthenticateAsClient(AgentServer, Nothing, SslProtocols.Tls12, False)
+                Dim PacketData As Byte() = Encoding.UTF8.GetBytes(Packet)
+                sslstream.Write(PacketData, 0, PacketData.Length)
                 NetworkLog.WriteToLog("Sending packet")
-
-                Dim Reader As New StreamReader(NStream)
+                Dim Reader As New StreamReader(sslstream)
                 While Reader.Peek > -1
                     Message = Message + Convert.ToChar(Reader.Read)
                 End While
-                NStream.Close()
+                sslstream.Flush()
+                sslstream.Close()
                 Client.Close()
                 NetworkLog.WriteToLog(Message)
-
             Else
                 NetworkLog.WriteToLog("Connection failed")
             End If
@@ -50,6 +53,8 @@ Public Class SendTCP
 
     End Sub
 
+    Public Shared Function TrustAllCertificatesCallback(sender As Object, cert As X509Certificate, chain As X509Chain, errors As System.Net.Security.SslPolicyErrors) As Boolean
+        Return True
+    End Function
 
 End Class
-

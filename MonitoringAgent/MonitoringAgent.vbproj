@@ -24,7 +24,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>2.2.5.%2a</ApplicationVersion>
+    <ApplicationVersion>2.3.5.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -95,10 +95,10 @@
   <ItemGroup>
     <Compile Include="Agent\Monitors\CollectData.vb" />
     <Compile Include="Agent\Monitors\CollectSystem.vb" />
+    <Compile Include="Agent\Network\SendSSL.vb" />
     <Compile Include="Agent\Processes\AgentLoad.vb" />
     <Compile Include="Agent\Database\Database.vb" />
     <Compile Include="Agent\Database\Tables.vb" />
-    <Compile Include="Agent\Encryption\Encryption.vb" />
     <Compile Include="Agent\Logging\NetworkLog.vb" />
     <Compile Include="Agent\Network\Packets.vb" />
     <Compile Include="Agent\Network\SendTCP.vb" />
