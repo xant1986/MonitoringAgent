@@ -28,8 +28,16 @@ Public Class SendTCP
             If Client.Connected Then
                 NetworkLog.WriteToLog("Agent connected to " & AgentServer & " on port " & TCPSendPort)
                 Dim NStream As NetworkStream = Client.GetStream
-                Dim PacketData As Byte() = Encoding.ASCII.GetBytes(Packet)
-                NStream.Write(PacketData, 0, PacketData.Length)
+
+                'Dim PacketData As Byte() = Encoding.ASCII.GetBytes(Packet)
+                'NStream.Write(PacketData, 0, PacketData.Length)
+
+                Dim CompressedPacket As String = Nothing
+                Dim Compression As New Compression
+                CompressedPacket = Compression.CompressedData(Packet)
+                Dim CompressedPacketData As Byte() = Encoding.UTF8.GetBytes(CompressedPacket)
+                NStream.Write(CompressedPacketData, 0, CompressedPacketData.Length)
+
                 NetworkLog.WriteToLog("Sending packet")
 
                 Dim Reader As New StreamReader(NStream)

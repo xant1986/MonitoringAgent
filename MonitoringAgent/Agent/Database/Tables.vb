@@ -1,7 +1,6 @@
 ﻿Namespace Agent
 
     Public Class AgentConfiguration
-        Public Property AgentClass As String
         Public Property AgentProperty As String
         Public Property AgentValue As String
     End Class

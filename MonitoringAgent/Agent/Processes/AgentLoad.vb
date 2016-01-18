@@ -19,7 +19,7 @@ Public Class AgentLoad
     End Sub
 
     Public Sub CreateXML()
-        If Not File.Exists(AgentPath & "\AgentConfiguration.xml") Then
+        If Not File.Exists(AgentPath & "\MonitoringAgent.xml") Then
             Dim Settings As XmlWriterSettings = New XmlWriterSettings()
             Settings.Indent = True
             Settings.NewLineOnAttributes = False
@@ -29,25 +29,22 @@ Public Class AgentLoad
             Using SW As New StringWriter(SB)
                 Using writer = XmlWriter.Create(SW, Settings)
                     writer.WriteStartDocument()
-                    writer.WriteStartElement("agent-config")
+                    writer.WriteStartElement("Agent")
 
-                    'For testing we are sending to the localhost
-                    writer.WriteStartElement("object")
-                    writer.WriteAttributeString("class", "agent")
-                    writer.WriteAttributeString("property", "server")
-                    writer.WriteAttributeString("value", "localhost")
+                    'Default Values
+                    writer.WriteStartElement("Configuration")
+                    writer.WriteAttributeString("Property", "server")
+                    writer.WriteAttributeString("Value", "localhost")
                     writer.WriteEndElement()
 
-                    writer.WriteStartElement("object")
-                    writer.WriteAttributeString("class", "agent")
-                    writer.WriteAttributeString("property", "tcp_port")
-                    writer.WriteAttributeString("value", "10000")
+                    writer.WriteStartElement("Configuration")
+                    writer.WriteAttributeString("Property", "tcp_port")
+                    writer.WriteAttributeString("Value", "10000")
                     writer.WriteEndElement()
 
-                    writer.WriteStartElement("object")
-                    writer.WriteAttributeString("class", "agent")
-                    writer.WriteAttributeString("property", "ssl_enabled")
-                    writer.WriteAttributeString("value", "False")
+                    writer.WriteStartElement("Configuration")
+                    writer.WriteAttributeString("Property", "ssl_enabled")
+                    writer.WriteAttributeString("Value", "False")
                     writer.WriteEndElement()
 
                     writer.WriteEndElement()
@@ -55,7 +52,7 @@ Public Class AgentLoad
                 End Using
             End Using
 
-            File.WriteAllText(AgentPath & "\AgentConfiguration.xml", SB.ToString)
+            File.WriteAllText(AgentPath & "\MonitoringAgent.xml", SB.ToString)
 
         End If
 
@@ -64,15 +61,14 @@ Public Class AgentLoad
     Public Sub LoadXML()
 
         Try
-            Dim xelement As XElement = XElement.Load(AgentPath & "\AgentConfiguration.xml")
-            Dim xmlobjects As IEnumerable(Of XElement) = xelement.Elements("object")
+            Dim xelement As XElement = XElement.Load(AgentPath & "\MonitoringAgent.xml")
+            Dim xmlobjects As IEnumerable(Of XElement) = xelement.Elements("Configuration")
 
             For Each i In xmlobjects
-                Database.AgentConfigList.Add(New AgentConfiguration With {.AgentClass = i.Attribute("class").Value, .AgentProperty = i.Attribute("property").Value, .AgentValue = i.Attribute("value").Value})
+                Database.AgentConfigList.Add(New AgentConfiguration With {.AgentProperty = i.Attribute("Property").Value, .AgentValue = i.Attribute("Value").Value})
             Next
 
             Dim Q = From T In Database.AgentConfigList
-                    Where T.AgentClass.Contains("agent")
                     Select T
 
             For Each i In Q
@@ -86,13 +82,9 @@ Public Class AgentLoad
                 If i.AgentProperty = "ssl_enabled" Then
                     SSLEnabled = i.AgentValue
                 End If
-
             Next
-
         Catch
         End Try
-
-
 
     End Sub
 

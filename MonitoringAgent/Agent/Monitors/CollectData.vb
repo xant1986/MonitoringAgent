@@ -109,27 +109,20 @@ Namespace Agent
 
         Public Sub GetServices()
 
-            Dim Q = From T In Database.AgentConfigList
-                    Where T.AgentClass = "windows" And T.AgentProperty = "service"
-                    Select T.AgentValue
-            For Each i In Q
-                Dim qString As String = "SELECT * FROM Win32_Service where Name='" & i & "'"
+            Dim qString As String = "SELECT * FROM Win32_Service WHERE StartMode='Auto'"
                 Dim Searcher As New ManagementObjectSearcher("root\CIMV2", qString)
                 Dim State = Nothing
-                Try
-                    For Each queryObj As ManagementObject In Searcher.Get()
-                        If queryObj("State") = "Running" Then
-                            State = 1
-                        Else
-                            State = 0
-                        End If
-                        Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentClass = "Services", .AgentProperty = queryObj("DisplayName"), .AgentValue = State})
-                    Next
-                Catch err As ManagementException
-                End Try
-            Next
-
-
+            Try
+                For Each queryObj As ManagementObject In Searcher.Get()
+                    If queryObj("State") = "Running" Then
+                        State = 1
+                    Else
+                        State = 0
+                    End If
+                    Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentClass = "Services", .AgentProperty = queryObj("DisplayName"), .AgentValue = State})
+                Next
+            Catch err As ManagementException
+            End Try
         End Sub
 
     End Class

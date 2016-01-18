@@ -21,7 +21,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F219E9461F64404EB577A94FE298AC2A"
+        "MsmKey" = "8:_CC05441ACD0B4594B2E379FF5A7335E9"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -182,10 +182,10 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F219E9461F64404EB577A94FE298AC2A"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_CC05441ACD0B4594B2E379FF5A7335E9"
             {
-            "SourcePath" = "8:..\\m2.ico"
-            "TargetName" = "8:m2.ico"
+            "SourcePath" = "8:..\\MonitoringAgent.ico"
+            "TargetName" = "8:MonitoringAgent.ico"
             "Tag" = "8:"
             "Folder" = "8:_2C7E41369F714C75B9FB32B800052524"
             "Condition" = "8:"
@@ -258,25 +258,25 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MonitoringAgent"
-        "ProductCode" = "8:{D1C1344E-55E9-43AB-AFD1-A4C99BD6FCD5}"
-        "PackageCode" = "8:{4FB16983-D05C-4F45-A313-A57770AB82C5}"
+        "ProductCode" = "8:{D5A9B299-CD24-4279-9B4F-3A2AA7BD98AE}"
+        "PackageCode" = "8:{893B09A8-E495-41C5-83AE-35A651D01B91}"
         "UpgradeCode" = "8:{3758D1B1-C7E0-47BA-8D6F-F89AC30041CC}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:2.3.5"
+        "ProductVersion" = "8:2.5.0"
         "Manufacturer" = "8:wcpSoft"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Monitoring Agent 2.2.5"
+        "Title" = "8:Monitoring Agent 2.5.0"
         "Subject" = "8:"
         "ARPCONTACT" = "8:Phil White"
         "Keywords" = "8:"
         "ARPCOMMENTS" = "8:Monitoring Agent"
         "ARPURLINFOABOUT" = "8:"
-        "ARPPRODUCTICON" = "8:_F219E9461F64404EB577A94FE298AC2A"
+        "ARPPRODUCTICON" = "8:_CC05441ACD0B4594B2E379FF5A7335E9"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"

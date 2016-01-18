@@ -30,17 +30,25 @@ Public Class SendSSL
             Dim Client As TcpClient = CType(ar.AsyncState, TcpClient)
             If Client.Connected Then
                 NetworkLog.WriteToLog("Agent connected to " & AgentServer & " on port " & TCPSendPort)
-                Dim sslstream = New SslStream(Client.GetStream, False, New RemoteCertificateValidationCallback(AddressOf TrustAllCertificatesCallback))
-                sslstream.AuthenticateAsClient(AgentServer, Nothing, SslProtocols.Tls12, False)
-                Dim PacketData As Byte() = Encoding.UTF8.GetBytes(Packet)
-                sslstream.Write(PacketData, 0, PacketData.Length)
+                Dim sslStream = New SslStream(Client.GetStream, False, New RemoteCertificateValidationCallback(AddressOf TrustAllCertificatesCallback))
+                sslStream.AuthenticateAsClient(AgentServer, Nothing, SslProtocols.Tls12, False)
+
+                'Dim PacketData As Byte() = Encoding.UTF8.GetBytes(Packet)
+                'sslstream.Write(PacketData, 0, PacketData.Length)
+
+                Dim CompressedPacket As String = Nothing
+                Dim Compression As New Compression
+                CompressedPacket = Compression.CompressedData(Packet)
+                Dim CompressedPacketData As Byte() = Encoding.UTF8.GetBytes(CompressedPacket)
+                sslStream.Write(CompressedPacketData, 0, CompressedPacketData.Length)
+
                 NetworkLog.WriteToLog("Sending packet")
                 Dim Reader As New StreamReader(sslstream)
                 While Reader.Peek > -1
                     Message = Message + Convert.ToChar(Reader.Read)
                 End While
-                sslstream.Flush()
-                sslstream.Close()
+                sslStream.Flush()
+                sslStream.Close()
                 Client.Close()
                 NetworkLog.WriteToLog(Message)
             Else

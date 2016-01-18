@@ -1,8 +1,17 @@
-# Monitoring Agent 2.3.5
+# Monitoring Agent 2.5.0
 
 This is a VB.Net Windows Service WMI Monitoring Agent
 
 This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, and sends the data to a central server. It works in conjuntion with the Monitoring Server application.
+
+###Changes for Version 2.5.0 (2016/01/18):
+
+1.  Added GZip compression.  Network packets are now aproximately 1/10th the size as previous.  
+
+2.  Changed Services to monitor all Auto services by default.  No configuration required.
+
+3.  Updated configuration file to remove uncesessary items.
+
 
 ###Changes for Version 2.3.5 (2016/01/15):
 

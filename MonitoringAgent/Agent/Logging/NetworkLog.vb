@@ -4,9 +4,9 @@ Imports System.IO
 Public Class NetworkLog
 
     Public Sub InitializeLog()
-        AgentNetLog = "Initializing Log..." & vbCrLf
+        AgentNetLog = "Monitoring Agent Version 2.5.0, Copyright Phil White 2016" & vbCrLf & "Initializing Log..." & vbCrLf
         SyncLock (Lock)
-            File.WriteAllText(AgentPath & "NetworkLog.log", AgentNetLog)
+            File.WriteAllText(AgentPath & "MonitoringAgent.log", AgentNetLog)
         End SyncLock
     End Sub
 
@@ -18,7 +18,7 @@ Public Class NetworkLog
         End If
         AgentNetLog = AgentNetLog & Date.Now & " [CLIENT] " & Message & vbCrLf
         SyncLock (Lock)
-            File.WriteAllText(AgentPath & "NetworkLog.log", AgentNetLog)
+            File.WriteAllText(AgentPath & "MonitoringAgent.log", AgentNetLog)
         End SyncLock
     End Sub
 
