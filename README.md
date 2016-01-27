@@ -4,6 +4,10 @@ This is a VB.Net Windows Service WMI Monitoring Agent
 
 This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, and sends the data to a central server. It works in conjuntion with the Monitoring Server application.
 
+###Changes for Version 2.5.0 (2016/01/26):
+
+1.  Updated hostname to use uppercase NetBIOS name instead of FQDN.  This could potentially be a problem for companies who use the same name with different domains.  
+
 ###Changes for Version 2.5.0 (2016/01/18):
 
 1.  Added GZip compression.  Network packets are now aproximately 1/10th the size as previous.  

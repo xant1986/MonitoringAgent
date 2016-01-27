@@ -3,7 +3,7 @@
 
         'Agent Parameters
         Public Shared AgentDate As Date = Nothing
-        Public Shared AgentName As String = Net.Dns.GetHostName
+        Public Shared AgentName As String = Environment.MachineName.ToUpper
         Public Shared AgentPath As String = Reflection.Assembly.GetEntryAssembly.Location.Replace("MonitoringAgent.exe", "")
         Public Shared AgentServer As String = Nothing
         Public Shared TCPSendPort As String = Nothing
