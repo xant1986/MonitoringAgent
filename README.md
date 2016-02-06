@@ -1,8 +1,18 @@
-# Monitoring Agent 2.5.0
+# Monitoring Agent 1.0.0
 
 This is a VB.Net Windows Service WMI Monitoring Agent
 
 This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, and sends the data to a central server. It works in conjuntion with the Monitoring Server application.
+
+Note: The Monitoring Agent has been reversioned to 1.0 to match with the upcoming 1.0 release of the Monitoring Server.
+
+
+###Changes for Version 1.0.0 (2016/02/06):
+
+1.  Changed installation directory to pcwsoft.
+
+2.  Added NOTICE file.
+
 
 ###Changes for Version 2.5.0 (2016/01/26):
 
