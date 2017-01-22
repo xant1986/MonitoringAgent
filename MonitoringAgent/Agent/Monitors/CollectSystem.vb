@@ -59,21 +59,13 @@ Namespace Agent
 
         Public Sub GetNetwork()
 
-            Dim wmiDataList As New List(Of Object)
-            Dim qString As String = "SELECT * FROM Win32_NetworkAdapterConfiguration"
-            Dim Searcher As New ManagementObjectSearcher("root\CIMV2", qString)
-
-            Try
-                For Each queryObj As ManagementObject In Searcher.Get()
-                    wmiDataList.Add(queryObj("IPAddress"))
-                Next
-            Catch err As ManagementException
-            End Try
-
-            Dim IPAddressList As New List(Of String)
-            IPAddressList.AddRange(wmiDataList.Item(0))
-
-            AgentIP = IPAddressList.Item(0)
+            Dim HostEntry = Net.Dns.GetHostEntry(AgentName)
+            For Each Address In HostEntry.AddressList
+                If Address.AddressFamily = Net.Sockets.AddressFamily.InterNetwork Then
+                    AgentIP = Address.ToString
+                    Exit For
+                End If
+            Next
 
         End Sub
 
