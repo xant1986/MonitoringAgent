@@ -37,6 +37,7 @@ Public Class Packets
                     writer.WriteElementString("AgentOSArchitecture", i.AgentOSArchitecture)
                     writer.WriteElementString("AgentProcessor", i.AgentProcessors)
                     writer.WriteElementString("AgentMemory", i.AgentMemory)
+                    writer.WriteElementString("AgentUptime", i.AgentUptime)
                     writer.WriteElementString("AgentDate", i.AgentDate)
                     writer.WriteEndElement()
                 Next

@@ -13,13 +13,15 @@ Namespace Agent
         Public Property AgentOSArchitecture As String
         Public Property AgentProcessors As String
         Public Property AgentMemory As String
+        Public Property AgentUptime As Integer
 
         Public Sub GetSystem()
 
             GetComputerSystem()
             GetOperatingSystem()
             GetNetwork()
-            Database.AgentSystemList.Add(New AgentSystem With {.AgentName = AgentName, .AgentDomain = AgentDomain, .AgentIP = AgentIP, .AgentOSName = AgentOSName, .AgentOSBuild = AgentOSBuild, .AgentOSArchitecture = AgentOSArchitecture, .AgentProcessors = AgentProcessors, .AgentMemory = AgentMemory, .AgentDate = AgentDate})
+            GetUptime()
+            Database.AgentSystemList.Add(New AgentSystem With {.AgentName = AgentName, .AgentDomain = AgentDomain, .AgentIP = AgentIP, .AgentOSName = AgentOSName, .AgentOSBuild = AgentOSBuild, .AgentOSArchitecture = AgentOSArchitecture, .AgentProcessors = AgentProcessors, .AgentMemory = AgentMemory, .AgentUptime = AgentUptime, .AgentDate = AgentDate})
 
         End Sub
 
@@ -69,6 +71,22 @@ Namespace Agent
 
         End Sub
 
+        Public Sub GetUptime()
+
+            Dim wmiDataList As New List(Of String)
+            Dim qString As String = "SELECT * FROM Win32_PerfFormattedData_PerfOS_System"
+            Dim searcher As New ManagementObjectSearcher("root\CIMV2", qString)
+
+            Try
+                For Each queryObj As ManagementObject In searcher.Get()
+                    AgentUptime = queryObj("SystemUptime")
+                Next
+            Catch err As ManagementException
+            End Try
+
+        End Sub
+
     End Class
+
 End Namespace
 

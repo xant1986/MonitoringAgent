@@ -29,6 +29,7 @@ Public Class SendTCP
                 NetworkLog.WriteToLog("Agent connected to " & AgentServer & " on port " & TCPSendPort)
                 Dim NStream As NetworkStream = Client.GetStream
 
+                'For sending non-compressed data.
                 'Dim PacketData As Byte() = Encoding.ASCII.GetBytes(Packet)
                 'NStream.Write(PacketData, 0, PacketData.Length)
 
@@ -39,6 +40,9 @@ Public Class SendTCP
                 NStream.Write(CompressedPacketData, 0, CompressedPacketData.Length)
 
                 NetworkLog.WriteToLog("Sending packet")
+
+                'View Packet data debug
+                'NetworkLog.WriteToLog(Packet)
 
                 Dim Reader As New StreamReader(NStream)
                 While Reader.Peek > -1

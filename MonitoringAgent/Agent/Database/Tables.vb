@@ -22,6 +22,7 @@
         Public Property AgentOSArchitecture As String
         Public Property AgentProcessors As String
         Public Property AgentMemory As String
+        Public Property AgentUptime As String
         Public Property AgentDate As String
     End Class
 

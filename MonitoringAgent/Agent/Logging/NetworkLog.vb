@@ -4,7 +4,7 @@ Imports System.IO
 Public Class NetworkLog
 
     Public Sub InitializeLog()
-        AgentNetLog = "Monitoring Agent Version 1.0.0, Copyright 2016 Phil White" & vbCrLf & "Initializing Log..." & vbCrLf
+        AgentNetLog = "Monitoring Agent Version 1.0.1, Copyright 2016 Phil White" & vbCrLf & "Initializing Log..." & vbCrLf
         SyncLock (Lock)
             File.WriteAllText(AgentPath & "MonitoringAgent.log", AgentNetLog)
         End SyncLock
@@ -12,7 +12,7 @@ Public Class NetworkLog
 
     Public Sub WriteToLog(ByVal Message As String)
         If Not AgentNetLog Is Nothing Then
-            If AgentNetLog.Length > 10000 Then
+            If AgentNetLog.Length > 100000 Then
                 AgentNetLog = Nothing
             End If
         End If

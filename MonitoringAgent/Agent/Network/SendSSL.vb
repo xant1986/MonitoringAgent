@@ -33,6 +33,7 @@ Public Class SendSSL
                 Dim sslStream = New SslStream(Client.GetStream, False, New RemoteCertificateValidationCallback(AddressOf TrustAllCertificatesCallback))
                 sslStream.AuthenticateAsClient(AgentServer, Nothing, SslProtocols.Tls12, False)
 
+                'For sending non-compressed data.
                 'Dim PacketData As Byte() = Encoding.UTF8.GetBytes(Packet)
                 'sslstream.Write(PacketData, 0, PacketData.Length)
 
