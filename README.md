@@ -1,9 +1,12 @@
-# Monitoring Agent 1.0.2
+# Monitoring Agent 1.0.3
 
 This is a VB.Net Windows Service WMI Monitoring Agent
 
 This is a basic Windows monitoring agent that collects system, processor, memory, disk, and service data, and sends the data to a central server. It works in conjuntion with the Monitoring Server application.
 
+###Changes for Version 1.0.2 (2018/02/23):
+
+1.  Added Network Monitoring  
 
 ###Changes for Version 1.0.2 (2017/02/12):
 

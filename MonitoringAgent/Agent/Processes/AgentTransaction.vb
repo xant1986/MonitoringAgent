@@ -25,6 +25,7 @@ Public Class AgentTransaction
         'Initialize Database
         AgentSystemList.Clear()
         AgentDataList.Clear()
+        AgentStateList.Clear()
 
         'Run Collection
         Dim CollectSystem As New CollectSystem

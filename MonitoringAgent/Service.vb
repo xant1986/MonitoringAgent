@@ -1,5 +1,5 @@
 ﻿'MonitoringAgent Version 1.0.2
-'Copyright 2017 Phil White, pcwSoft
+'Copyright 2018 Phil White, pcwSoft
 'This software is released under the Apache 2.0 License
 'Maintained at http://github.com/philipcwhite
 
@@ -35,7 +35,7 @@ Public Class Service
     Private Sub Tick(sender As System.Object, e As System.EventArgs)
 
         Dim SystemTime As Date = Date.Now
-        If SystemTime.ToString("ss") = "00" Then
+        If SystemTime.ToString("mm:ss").Substring(1) = "0:00" Or SystemTime.ToString("mm:ss").Substring(1) = "5:00" Then
             AgentDate = SystemTime
             Dim ATransaction As New AgentTransaction
             AgentCollectThread = New Thread(AddressOf ATransaction.RunTransaction)

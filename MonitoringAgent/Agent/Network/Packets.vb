@@ -15,6 +15,9 @@ Public Class Packets
         Dim Q2 = From T In AgentDataList
                  Select T
 
+        Dim Q3 = From T In AgentStateList
+                 Select T
+
         Dim settings As XmlWriterSettings = New XmlWriterSettings()
         settings.Indent = True
         settings.NewLineOnAttributes = False
@@ -44,6 +47,14 @@ Public Class Packets
 
                 For Each i In Q2
                     writer.WriteStartElement("AgentData")
+                    writer.WriteElementString("AgentClass", i.AgentClass)
+                    writer.WriteElementString("AgentProperty", i.AgentProperty)
+                    writer.WriteElementString("AgentValue", i.AgentValue.ToString)
+                    writer.WriteEndElement()
+                Next
+
+                For Each i In Q3
+                    writer.WriteStartElement("AgentState")
                     writer.WriteElementString("AgentClass", i.AgentClass)
                     writer.WriteElementString("AgentProperty", i.AgentProperty)
                     writer.WriteElementString("AgentValue", i.AgentValue.ToString)

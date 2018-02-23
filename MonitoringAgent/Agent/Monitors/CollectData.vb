@@ -9,6 +9,7 @@ Namespace Agent
             GetMemory()
             GetPageFile()
             GetLocalDiskSpace()
+            GetNetwork()
             GetServices()
 
         End Sub
@@ -82,22 +83,22 @@ Namespace Agent
         Public Sub GetLocalDiskSpace()
 
             Dim LDActiveTime As Double = 0
-            Dim wmiDataList As New List(Of LocalDisk)
+            Dim wmiDataList As New List(Of WMIData)
             Dim qString As String = "SELECT * FROM Win32_PerfFormattedData_PerfDisk_LogicalDisk"
             Dim searcher As New ManagementObjectSearcher("root\CIMV2", qString)
 
             Try
                 For Each queryObj As ManagementObject In searcher.Get()
-                    wmiDataList.Add(New LocalDisk With {.Name = queryObj("Name"), .PercentFree = queryObj("PercentFreeSpace"), .IdleTime = queryObj("PercentIdleTime")})
+                    wmiDataList.Add(New WMIData With {.Name = queryObj("Name"), .Var01 = queryObj("PercentFreeSpace"), .Var02 = queryObj("PercentIdleTime")})
                 Next
             Catch err As ManagementException
             End Try
 
             Try
                 For Each i In wmiDataList
-                    LDActiveTime = 100 - i.IdleTime
+                    LDActiveTime = 100 - i.Var02
                     If i.Name.ToString.Length <= 2 Then
-                        Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentClass = "Local Disk (" & i.Name & ")", .AgentProperty = "Free Space (%)", .AgentValue = i.PercentFree})
+                        Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentClass = "Local Disk (" & i.Name & ")", .AgentProperty = "Free Space (%)", .AgentValue = i.Var01})
                         Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentClass = "Local Disk (" & i.Name & ")", .AgentProperty = "Active Time (%)", .AgentValue = LDActiveTime})
                     End If
                 Next
@@ -106,12 +107,45 @@ Namespace Agent
 
         End Sub
 
+        Public Sub GetNetwork()
+
+            Dim wmiDataList As New List(Of WMIData)
+            Dim qString As String = "SELECT * FROM Win32_PerfFormattedData_Tcpip_NetworkInterface"
+            Dim searcher As New ManagementObjectSearcher("root\CIMV2", qString)
+
+            Try
+                For Each queryObj As ManagementObject In searcher.Get()
+                    wmiDataList.Add(New WMIData With {.Var01 = queryObj("BytesReceivedPersec"), .Var02 = queryObj("BytesSentPersec")})
+                Next
+            Catch err As ManagementException
+            End Try
+
+            Try
+                Dim TotalReceived As Double = 0
+                Dim TotalSent As Double = 0
+                For Each i In wmiDataList
+                    TotalReceived = TotalReceived + i.Var01
+                    TotalSent = TotalSent + i.Var02
+                Next
+
+                TotalReceived = Round(TotalReceived / 1000)
+                TotalSent = Round(TotalSent / 1000)
+
+                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentClass = "Network", .AgentProperty = "Total KB/s Received", .AgentValue = TotalReceived})
+                Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentClass = "Network", .AgentProperty = "Total KB/s Sent", .AgentValue = TotalSent})
+
+            Catch ex As Exception
+            End Try
+
+        End Sub
+
+
 
         Public Sub GetServices()
 
             Dim qString As String = "SELECT * FROM Win32_Service WHERE StartMode='Auto'"
-                Dim Searcher As New ManagementObjectSearcher("root\CIMV2", qString)
-                Dim State = Nothing
+            Dim Searcher As New ManagementObjectSearcher("root\CIMV2", qString)
+            Dim State = Nothing
             Try
                 For Each queryObj As ManagementObject In Searcher.Get()
                     If queryObj("State") = "Running" Then
@@ -119,7 +153,7 @@ Namespace Agent
                     Else
                         State = 0
                     End If
-                    Database.AgentDataList.Add(New AgentData With {.AgentName = AgentParameters.AgentName, .AgentClass = "Services", .AgentProperty = queryObj("DisplayName"), .AgentValue = State})
+                    Database.AgentStateList.Add(New AgentState With {.AgentName = AgentParameters.AgentName, .AgentClass = "Services", .AgentProperty = queryObj("DisplayName"), .AgentValue = State})
                 Next
             Catch err As ManagementException
             End Try
@@ -127,10 +161,12 @@ Namespace Agent
 
     End Class
 
-    Public Class LocalDisk
+    Public Class WMIData
         Public Property Name
-        Public Property PercentFree
-        Public Property IdleTime
+        Public Property Var01
+        Public Property Var02
     End Class
+
+
 
 End Namespace
